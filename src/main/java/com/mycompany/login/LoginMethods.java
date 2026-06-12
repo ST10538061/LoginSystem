@@ -45,30 +45,34 @@ public class LoginMethods
     }
 
     // Register User
-    public String registerUser(String username, String password, String phoneNumber) 
+    public String registerUser(String firstName,
+                           String lastName,
+                           String username,
+                           String password,
+                           String cell)
+{
+    this.username = username;
+    this.password = password;
+    this.phoneNumber = cell;
+
+    if(!checkUserName(username))
     {
-
-        if (!checkUserName(username)) 
-        {
-            return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
-        }
-
-        if (!checkPasswordComplexity(password)) 
-        {
-            return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
-        }
-
-        if (!checkCellPhoneNumber(phoneNumber)) 
-        {
-            return "Cell phone number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
-        }
-
-        this.username = username;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-
-        return "User has been registered successfully.";
+        return "Username is not correctly formatted.";
     }
+
+    if(!checkPasswordComplexity(password))
+    {
+        return "Password is not correctly formatted.";
+    }
+
+    if(!checkCellPhoneNumber(cell))
+    {
+        return "Cell phone number incorrectly formatted.";
+    }
+
+    return "User successfully registered.";
+}
+    
 
     // Login User
     public boolean loginUser(String username, String password)  
@@ -86,7 +90,10 @@ public class LoginMethods
         else
         {
             return "Username or password incorrect, please try again.";
+    
         }
-    }
-
+    } 
 }
+
+
+
